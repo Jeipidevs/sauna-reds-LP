@@ -1,0 +1,16 @@
+{
+  "name": "Sauna Reds",
+  "short_name": "Sauna Reds",
+  "description": "Boate e casa noturna em Capão da Canoa, RS. Programação especial toda semana.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#cc0000",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

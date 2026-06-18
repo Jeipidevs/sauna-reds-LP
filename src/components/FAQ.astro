@@ -1,0 +1,107 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FAQItem[];
+  title?: string;
+  eyebrow?: string;
+}
+
+const {
+  items,
+  title = 'Perguntas Frequentes',
+  eyebrow = 'FAQ',
+} = Astro.props;
+---
+
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="sec-header">
+      <span class="sec-eyebrow reveal">{eyebrow}</span>
+      <h2 class="sec-title reveal d1">{title}</h2>
+      <div class="sec-divider reveal d2"></div>
+    </div>
+    <div class="faq-list">
+      {items.map((item, i) => (
+        <details class={`faq-item glass reveal d${Math.min(i + 1, 5)}`}>
+          <summary class="faq-question">
+            <span>{item.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{item.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section { background: var(--surface); }
+
+  .faq-list {
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .faq-item {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.4rem 1.75rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    transition: color 0.2s;
+    user-select: none;
+  }
+
+  .faq-question::-webkit-details-marker { display: none; }
+  .faq-question::marker { display: none; }
+
+  .faq-question:hover { color: var(--gold); }
+
+  .faq-icon {
+    flex-shrink: 0;
+    color: var(--gold);
+    transition: transform 0.3s;
+  }
+
+  details[open] .faq-icon { transform: rotate(180deg); }
+
+  details[open] .faq-question { color: var(--gold); }
+
+  details[open] {
+    border-color: rgba(212, 175, 55, 0.3);
+  }
+
+  .faq-answer {
+    padding: 0 1.75rem 1.4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .faq-answer p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.75;
+    padding-top: 1rem;
+  }
+</style>

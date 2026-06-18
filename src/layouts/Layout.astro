@@ -1,0 +1,138 @@
+---
+import SchemaLD from '../components/SchemaLD.astro';
+import AgeGate from '../components/AgeGate.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import '../styles/global.css';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  faqItems?: FAQItem[];
+  breadcrumb?: BreadcrumbItem[];
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  faqItems,
+  breadcrumb,
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = 'https://saunaredsoficial.com.br';
+const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
+const ogImage = `${siteUrl}/og-image.jpg`;
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content={noindex ? 'noindex,nofollow' : 'index,follow'} />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- Open Graph (WhatsApp, Facebook, Instagram preview) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Sauna Reds – Capão da Canoa RS" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="Sauna Reds" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- Favicon & PWA -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#cc0000" />
+
+  <!-- Fonts: Adobe Fonts (Lora) -->
+  <link rel="stylesheet" href="https://use.typekit.net/oll2qhl.css" />
+
+  <!-- Sitemap discovery -->
+  <link rel="sitemap" href="/sitemap-index.xml" />
+
+  <!-- JSON-LD Schema -->
+  <SchemaLD faqItems={faqItems} breadcrumb={breadcrumb} />
+</head>
+<body>
+  <AgeGate />
+  <Header />
+  <main id="main-content">
+    <slot />
+  </main>
+  <Footer />
+  <WhatsAppFloat />
+
+  <!-- Cookie Consent -->
+  <div id="cookie-banner" role="region" aria-label="Aviso de cookies">
+    <p class="cookie-text">
+      Utilizamos cookies para melhorar sua experiência. Ao continuar, você concorda com nossa
+      <a href="/contato">Política de Privacidade</a>.
+    </p>
+    <div class="cookie-btns">
+      <button class="btn-accept" id="cookie-accept">Aceitar</button>
+      <button class="btn-decline" id="cookie-decline">Recusar</button>
+    </div>
+  </div>
+
+  <!-- Global scripts: reveal + cookies -->
+  <script>
+    // Scroll reveal
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // Cookie banner
+    const banner = document.getElementById('cookie-banner');
+    if (banner && localStorage.getItem('cookies-set')) {
+      banner.style.display = 'none';
+    }
+    document.getElementById('cookie-accept')?.addEventListener('click', () => {
+      localStorage.setItem('cookies-set', '1');
+      if (banner) banner.style.display = 'none';
+    });
+    document.getElementById('cookie-decline')?.addEventListener('click', () => {
+      localStorage.setItem('cookies-set', '0');
+      if (banner) banner.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

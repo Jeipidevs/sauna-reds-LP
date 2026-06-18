@@ -1,0 +1,91 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  faqItems?: FAQItem[];
+  breadcrumb?: BreadcrumbItem[];
+}
+
+const { faqItems, breadcrumb } = Astro.props;
+const siteUrl = 'https://saunaredsoficial.com.br';
+
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'NightClub'],
+  name: 'Sauna Reds',
+  url: siteUrl,
+  telephone: '+5551980437575',
+  email: 'redssauna@gmail.com',
+  image: `${siteUrl}/og-image.jpg`,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Rua Alfa do Centauro, 720',
+    addressNeighborhood: 'Arco Íris',
+    addressLocality: 'Capão da Canoa',
+    addressRegion: 'RS',
+    postalCode: '95555-000',
+    addressCountry: 'BR',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -29.734046106225108,
+    longitude: -50.0063330018132,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '14:00',
+      closes: '05:00',
+    },
+  ],
+  sameAs: ['https://www.instagram.com/reds.capao'],
+  priceRange: '$$',
+  currenciesAccepted: 'BRL',
+  paymentAccepted: 'Cash, Credit Card',
+  areaServed: {
+    '@type': 'City',
+    name: 'Capão da Canoa',
+  },
+};
+
+const faqSchema = faqItems?.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    }
+  : null;
+
+const breadcrumbSchema = breadcrumb?.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumb.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        item: `${siteUrl}${item.url}`,
+      })),
+    }
+  : null;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
+{faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+{breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}

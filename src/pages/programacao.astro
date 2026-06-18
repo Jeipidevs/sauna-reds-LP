@@ -1,0 +1,173 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const WA_URL = 'https://wa.me/5551980437575';
+
+const breadcrumb = [
+  { name: 'Início',     url: '/'            },
+  { name: 'Programação', url: '/programacao' },
+];
+
+const nights = [
+  {
+    day: 'Terça-Feira',
+    name: 'Terça da Calmaria',
+    tag: 'Tranquilo',
+    icon: '🌊',
+    color: '#1a3a5c',
+    shortDesc: 'Ambiente intimista e aconchegante para uma noite de relaxamento.',
+    fullDesc: 'A Terça da Calmaria foi criada para quem busca uma noite tranquila, longe do agito do fim de semana. O ambiente fica mais suave, a música é mais baixinha e o clima é perfeito para conversas e novos encontros. Ideal para quem quer começar a semana se presenteando.',
+    opens: '14h',
+    closes: '5h',
+  },
+  {
+    day: 'Quarta-Feira',
+    name: 'Quarta do Prazer',
+    tag: 'Especial',
+    icon: '🔥',
+    color: '#3a1a1a',
+    shortDesc: 'Programação diferenciada que esquenta o meio da semana.',
+    fullDesc: 'Na Quarta do Prazer a temperatura sobe! Programação especial e exclusiva para tornar a quarta-feira o dia mais esperado da semana. Atrações surpresas, promoções no cardápio e ambiente preparado especialmente para uma noite inesquecível.',
+    opens: '14h',
+    closes: '5h',
+  },
+  {
+    day: 'Quinta-Feira',
+    name: 'Quinta do TBT',
+    tag: 'Nostalgia',
+    icon: '🎵',
+    color: '#1a1a3a',
+    shortDesc: 'As melhores músicas clássicas num clima saudosista e sedutor.',
+    fullDesc: 'A Quinta do TBT é uma viagem no tempo. As melhores músicas dos anos 80, 90 e 2000 embalam uma noite cheia de nostalgia e sedução. Perfeita para quem quer reviver bons momentos e criar novos com a companhia certa.',
+    opens: '14h',
+    closes: '5h',
+  },
+  {
+    day: 'Sexta-Feira',
+    name: 'Sexta da Maldade',
+    tag: 'Hot',
+    icon: '😈',
+    color: '#3a0a0a',
+    shortDesc: 'A noite mais aguardada. O inesperado acontece toda sexta.',
+    fullDesc: 'A Sexta da Maldade é a noite mais aguardada da semana na Sauna Reds. A programação é intensa, o ambiente ferve e as surpresas estão por toda parte. É a noite em que os limites são testados e os desejos ganham vida. Venha preparado.',
+    opens: '14h',
+    closes: '5h',
+  },
+  {
+    day: 'Sábado',
+    name: 'Sábado do Bailão',
+    tag: 'Animado',
+    icon: '🎉',
+    color: '#1a2a0a',
+    shortDesc: 'Muita dança e diversão até o amanhecer no melhor do fim de semana.',
+    fullDesc: 'O Sábado do Bailão é a grande festa da semana! Muita música, dança, alegria e diversão até o sol nascer. O ambiente fica completamente lotado de energia e as pessoas se soltam de verdade. O melhor do fim de semana está aqui.',
+    opens: '14h',
+    closes: '5h',
+  },
+];
+---
+
+<Layout
+  title="Programação Semanal – Sauna Reds Capão da Canoa RS"
+  description="Terça da Calmaria, Quarta do Prazer, Quinta do TBT, Sexta da Maldade e Sábado do Bailão. Sauna Reds, Capão da Canoa – RS. Terça a sábado, 14h às 5h."
+  breadcrumb={breadcrumb}
+>
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Localização na hierarquia do site">
+    <a href="/">Início</a>
+    <span aria-hidden="true">›</span>
+    <span aria-current="page">Programação</span>
+  </nav>
+
+  <!-- Banner -->
+  <div class="page-banner">
+    <span class="page-banner__eyebrow">Toda Semana</span>
+    <h1 class="page-banner__title">Programação <em>Semanal</em><br />da Sauna Reds</h1>
+    <p class="page-banner__sub">
+      Cinco noites, cinco experiências únicas. De terça a sábado, das 14h às 5h,
+      em Capão da Canoa, RS.
+    </p>
+  </div>
+
+  <!-- Grid de noites -->
+  <section style="background:var(--bg)">
+    <div class="container">
+      <div class="prog-grid">
+        {nights.map((n, i) => (
+          <article class={`prog-card glass reveal d${Math.min(i,4)}`}>
+            <div class="prog-header">
+              <div class="prog-icon">{n.icon}</div>
+              <div>
+                <div class="prog-day">{n.day}</div>
+                <h2 class="prog-name">{n.name}</h2>
+              </div>
+              <span class="prog-tag">{n.tag}</span>
+            </div>
+            <p class="prog-short">{n.shortDesc}</p>
+            <p class="prog-full">{n.fullDesc}</p>
+            <div class="prog-hours">
+              <span>🕒 {n.opens} às {n.closes}</span>
+            </div>
+            <a
+              href={WA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary prog-btn"
+              aria-label={`Reservar para ${n.name}`}
+            >
+              Reservar para essa Noite
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="background:var(--surface);text-align:center">
+    <div class="container" style="max-width:620px">
+      <span class="sec-eyebrow reveal">Não Perca</span>
+      <h2 class="sec-title reveal d1" style="margin-bottom:1rem">
+        Sua noite favorita<br /><span>está esperando por você</span>
+      </h2>
+      <p class="reveal d2" style="color:var(--muted);margin-bottom:2rem;line-height:1.8">
+        Entre em contato pelo WhatsApp para reservas,<br />
+        informações e novidades da programação.
+      </p>
+      <a href={WA_URL} target="_blank" rel="noopener" class="btn-primary reveal d3">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Falar no WhatsApp
+      </a>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .prog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+  @media (max-width: 480px) { .prog-grid { grid-template-columns: 1fr; } }
+
+  .prog-card { display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .prog-header { display: flex; align-items: flex-start; gap: 1rem; }
+  .prog-icon   { font-size: 2.2rem; flex-shrink: 0; }
+  .prog-day    { font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); }
+  .prog-name   { font-size: 1.35rem; margin-top: 0.15rem; }
+  .prog-tag    { margin-left: auto; flex-shrink: 0; display: inline-block; background: var(--red); color: #fff; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.2rem 0.65rem; border-radius: 20px; align-self: flex-start; }
+
+  .prog-short { color: var(--text); font-size: 0.88rem; font-weight: 500; }
+  .prog-full  { color: var(--muted); font-size: 0.82rem; line-height: 1.75; flex: 1; }
+
+  .prog-hours {
+    font-size: 0.78rem;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .prog-btn { width: 100%; justify-content: center; margin-top: 0.5rem; }
+</style>

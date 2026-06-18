@@ -1,0 +1,210 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const WA_URL = 'https://wa.me/5551980437575';
+
+const breadcrumb = [
+  { name: 'Início', url: '/' },
+  { name: 'Sobre Nós', url: '/sobre' },
+];
+
+const values = [
+  { icon: '🔒', title: 'Segurança',     desc: 'Ambiente controlado, discreto e seguro para todos os clientes e colaboradores.' },
+  { icon: '✨', title: 'Sofisticação',  desc: 'Espaço cuidadosamente projetado para oferecer conforto e elegância em cada detalhe.' },
+  { icon: '🤝', title: 'Respeito',      desc: 'Tratamos todos com dignidade. Nossa equipe é treinada para garantir um ambiente respeitoso.' },
+  { icon: '🎭', title: 'Experiência',   desc: 'Mais de 20 anos criando momentos únicos e inesquecíveis no Litoral Norte do RS.' },
+];
+---
+
+<Layout
+  title="Sobre a Sauna Reds – 20 Anos em Capão da Canoa RS"
+  description="Conheça a história da Sauna Reds, referência em entretenimento adulto no Litoral Norte do RS há mais de 20 anos. Rua Alfa do Centauro, 720, Arco Íris, Capão da Canoa."
+  breadcrumb={breadcrumb}
+>
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Localização na hierarquia do site">
+    <a href="/">Início</a>
+    <span aria-hidden="true">›</span>
+    <span aria-current="page">Sobre Nós</span>
+  </nav>
+
+  <!-- Banner -->
+  <div class="page-banner">
+    <span class="page-banner__eyebrow">Nossa História</span>
+    <h1 class="page-banner__title">20 Anos de <em>História</em><br />em Capão da Canoa</h1>
+    <p class="page-banner__sub">
+      Referência em entretenimento adulto no Litoral Norte do Rio Grande do Sul desde o início dos anos 2000.
+    </p>
+  </div>
+
+  <!-- História -->
+  <section style="background:var(--bg)">
+    <div class="container">
+      <div class="about-full-layout">
+        <div class="about-full-text">
+          <span class="sec-eyebrow reveal">Quem Somos</span>
+          <h2 class="sec-title reveal d1" style="text-align:left;margin-bottom:1.5rem">
+            Uma casa construída<br /><span>com tradição e respeito</span>
+          </h2>
+          <p class="body-text reveal d2">
+            A Sauna Reds é a referência em entretenimento adulto sofisticado no Litoral Norte do RS. Localizada em Capão da Canoa, oferecemos noites intensas em um ambiente premium, com música envolvente, iluminação quente e atendimento exclusivo.
+          </p>
+          <p class="body-text reveal d3">
+            Nosso espaço é pensado para quem busca prazer, luxo e discrição — sem excessos, sem vulgaridade. Aberta de terça a sábado, das 14h às 5h, a Sauna Reds é o destino ideal para quem quer viver experiências únicas e inesquecíveis.
+          </p>
+          <p class="body-text reveal d4">
+            📍 Capão da Canoa – RS · 📆 Terça a sábado · ⏰ 14h às 5h<br />
+            Siga <a href="https://www.instagram.com/reds.capao" target="_blank" rel="noopener" style="color:var(--gold)">@reds.capao</a> no Instagram para acompanhar novidades, eventos e bastidores.
+          </p>
+        </div>
+        <div class="about-full-gallery reveal d2">
+          <div class="gallery-img-full main-img">
+            <picture>
+              <source srcset="/images/salao.webp" type="image/webp" />
+              <img src="/images/salao.jpg" alt="Salão principal da Sauna Reds com luzes e pista" loading="lazy" decoding="async" width="900" height="1200" />
+            </picture>
+          </div>
+          <div class="gallery-img-full">
+            <picture>
+              <source srcset="/images/sinuca.webp" type="image/webp" />
+              <img src="/images/sinuca.jpg" alt="Mesa de sinuca da Sauna Reds" loading="lazy" decoding="async" width="800" height="1067" />
+            </picture>
+          </div>
+          <div class="gallery-img-full">
+            <picture>
+              <source srcset="/images/recepcao.webp" type="image/webp" />
+              <img src="/images/recepcao.jpg" alt="Recepção e entrada da Sauna Reds" loading="lazy" decoding="async" width="800" height="1067" />
+            </picture>
+          </div>
+          <div class="gallery-img-full">
+            <picture>
+              <source srcset="/images/bar-neons.webp" type="image/webp" />
+              <img src="/images/bar-neons.jpg" alt="Bar da Sauna Reds com Red Bull e Heineken" loading="lazy" decoding="async" width="800" height="1067" />
+            </picture>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section style="background:var(--surface)">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-eyebrow reveal">Números que nos orgulham</span>
+        <h2 class="sec-title reveal d1">A Sauna Reds <span>em dados</span></h2>
+        <div class="sec-divider reveal d2"></div>
+      </div>
+      <div class="stats-grid">
+        {[
+          { num: '20+',  label: 'Anos de Operação',         desc: 'Servindo Capão da Canoa desde o início dos anos 2000' },
+          { num: '50k+', label: 'Clientes Atendidos',        desc: 'Histórico de excelência e satisfação comprovada' },
+          { num: '5×',   label: 'Noites por Semana',         desc: 'Terça a sábado com programação temática exclusiva' },
+          { num: '1',    label: 'Endereço Fixo e Confiável', desc: 'Rua Alfa do Centauro, 720, Arco Íris — fácil de encontrar, fácil de amar' },
+        ].map((s, i) => (
+          <div class={`glass stat-card reveal d${i}`}>
+            <div class="stat-num-lg">{s.num}</div>
+            <div class="stat-label-lg">{s.label}</div>
+            <p class="stat-desc">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Valores -->
+  <section style="background:var(--bg)">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-eyebrow reveal">Nossos Pilares</span>
+        <h2 class="sec-title reveal d1">O que nos <span>define</span></h2>
+        <div class="sec-divider reveal d2"></div>
+      </div>
+      <div class="values-grid">
+        {values.map((v, i) => (
+          <div class={`glass value-card reveal d${i}`}>
+            <div class="value-icon">{v.icon}</div>
+            <h3 class="value-title">{v.title}</h3>
+            <p class="value-desc">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="background:var(--surface);text-align:center">
+    <div class="container" style="max-width:600px">
+      <span class="sec-eyebrow reveal">Venha nos Conhecer</span>
+      <h2 class="sec-title reveal d1" style="margin-bottom:1rem">
+        Venha vivenciar <span>pessoalmente</span>
+      </h2>
+      <p class="reveal d2" style="color:var(--muted);margin-bottom:2rem;line-height:1.8">
+        A melhor forma de conhecer a Sauna Reds é vindo até nós.<br />
+        Rua Alfa do Centauro, 720, Arco Íris · Capão da Canoa, RS · Ter–Sáb 14h às 5h
+      </p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap" class="reveal d3">
+        <a href={WA_URL} target="_blank" rel="noopener" class="btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Falar no WhatsApp
+        </a>
+        <a href="/contato" class="btn-outline">Ver Localização</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .about-full-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  @media (max-width: 768px) { .about-full-layout { grid-template-columns: 1fr; } }
+
+  .body-text { color: var(--muted); line-height: 1.85; font-size: 0.93rem; margin-bottom: 1.2rem; }
+
+  .about-full-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+    position: sticky;
+    top: 5rem;
+  }
+  @media (max-width: 768px) { .about-full-gallery { position: static; } }
+
+  .gallery-img-full {
+    border-radius: 8px;
+    border: 1px solid rgba(212,175,55,0.1);
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    transition: border-color 0.3s;
+  }
+  .gallery-img-full img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .gallery-img-full:hover { border-color: rgba(204,0,0,0.4); }
+  .gallery-img-full:hover img { transform: scale(1.04); }
+  .gallery-img-full.main-img { grid-column: 1/-1; aspect-ratio: 16/7; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.4rem;
+  }
+  .stat-card    { text-align: center; }
+  .stat-num-lg  { font-family: "lora", serif; font-size: 2.8rem; font-weight: 700; color: var(--gold); }
+  .stat-label-lg{ font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text); font-weight: 600; margin: 0.4rem 0; }
+  .stat-desc    { color: var(--muted); font-size: 0.82rem; line-height: 1.65; }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.4rem;
+  }
+  .value-card  { text-align: center; }
+  .value-icon  { font-size: 2.5rem; margin-bottom: 1rem; }
+  .value-title { font-size: 1.2rem; margin-bottom: 0.6rem; }
+  .value-desc  { color: var(--muted); font-size: 0.85rem; line-height: 1.7; }
+</style>

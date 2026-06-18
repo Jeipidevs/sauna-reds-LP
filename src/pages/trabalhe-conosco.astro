@@ -1,0 +1,161 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const WA_MSG = encodeURIComponent('Olá, tenho interesse em trabalhar na Sauna Reds. Pode me passar mais informações?');
+const WA_URL = `https://wa.me/5551980437575?text=${WA_MSG}`;
+
+const breadcrumb = [
+  { name: 'Início',          url: '/'                 },
+  { name: 'Trabalhe Conosco', url: '/trabalhe-conosco' },
+];
+
+const benefits = [
+  { icon: '💰', title: 'Ótima Remuneração',   desc: 'Remuneração competitiva e possibilidade de ganhos acima da média do mercado.' },
+  { icon: '🕐', title: 'Horários Flexíveis',  desc: 'Turnos que se adaptam à sua rotina. Funcio­namos a partir das 15h.' },
+  { icon: '🔒', title: 'Ambiente Seguro',     desc: 'Espaço controlado, com equipe treinada e protocolos de segurança rigorosos.' },
+  { icon: '🤝', title: 'Equipe Acolhedora',   desc: 'Time unido e respeitoso. Aqui todo mundo se cuida.' },
+  { icon: '🎭', title: 'Total Privacidade',   desc: 'Seu trabalho é tratado com discrição e respeito por toda a equipe.' },
+  { icon: '📈', title: 'Crescimento',         desc: 'Valorização de profissionais dedicados. Oportunidades de crescimento interno.' },
+];
+
+const requirements = [
+  'Ser maior de 18 anos',
+  'Apresentar documento de identidade',
+  'Ser simpático(a) e comunicativo(a)',
+  'Disponibilidade para turnos noturnos',
+  'Comprometimento e responsabilidade',
+  'Residir em Capão da Canoa ou região',
+];
+---
+
+<Layout
+  title="Trabalhe Conosco – Sauna Reds Capão da Canoa RS"
+  description="Vagas abertas na Sauna Reds, Capão da Canoa RS. Ambiente seguro, ótima remuneração e horários flexíveis. Maiores de 18 anos. Fale conosco pelo WhatsApp."
+  breadcrumb={breadcrumb}
+>
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Localização na hierarquia do site">
+    <a href="/">Início</a>
+    <span aria-hidden="true">›</span>
+    <span aria-current="page">Trabalhe Conosco</span>
+  </nav>
+
+  <!-- Banner -->
+  <div class="page-banner">
+    <span class="page-banner__eyebrow">Faça Parte do Time</span>
+    <h1 class="page-banner__title">Trabalhe <em>Conosco</em></h1>
+    <p class="page-banner__sub">
+      A Sauna Reds está sempre em busca de pessoas especiais para integrar nossa equipe
+      em Capão da Canoa, RS.
+    </p>
+  </div>
+
+  <!-- Intro -->
+  <section style="background:var(--bg)">
+    <div class="container" style="max-width:780px;text-align:center">
+      <span class="sec-eyebrow reveal">Por que trabalhar aqui?</span>
+      <h2 class="sec-title reveal d1" style="margin-bottom:1.5rem">
+        Um lugar onde você é <span>valorizado</span>
+      </h2>
+      <p class="reveal d2" style="color:var(--muted);line-height:1.85;font-size:0.95rem;margin-bottom:1rem">
+        Na Sauna Reds, acreditamos que uma equipe feliz é a base de um negócio de sucesso. Por isso, investimos no bem-estar, na segurança e no crescimento de cada colaborador. Trabalhamos com respeito, transparência e valorização humana.
+      </p>
+      <p class="reveal d3" style="color:var(--muted);line-height:1.85;font-size:0.95rem">
+        Se você busca um emprego que respeite sua individualidade, ofereça boa remuneração e um ambiente saudável de trabalho, venha conversar conosco.
+      </p>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section style="background:var(--surface)">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-eyebrow reveal">Vantagens</span>
+        <h2 class="sec-title reveal d1">Benefícios de <span>trabalhar aqui</span></h2>
+        <div class="sec-divider reveal d2"></div>
+      </div>
+      <div class="benefits-grid">
+        {benefits.map((b, i) => (
+          <div class={`glass benefit-card reveal d${Math.min(i,4)}`}>
+            <div class="benefit-icon">{b.icon}</div>
+            <h3 class="benefit-title">{b.title}</h3>
+            <p class="benefit-desc">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Requirements + CTA -->
+  <section style="background:var(--bg)">
+    <div class="container">
+      <div class="recruit-layout">
+        <div>
+          <span class="sec-eyebrow reveal">Requisitos</span>
+          <h2 class="sec-title reveal d1" style="text-align:left;margin-bottom:1.5rem">
+            O que <span>buscamos</span>
+          </h2>
+          <ul class="req-list reveal d2">
+            {requirements.map((r) => (
+              <li class="req-item">
+                <span class="req-check" aria-hidden="true">✓</span>
+                {r}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="recruit-cta glass reveal d2">
+          <div class="recruit-cta-icon">💼</div>
+          <h3 class="recruit-cta-title">Pronto para começar?</h3>
+          <p class="recruit-cta-desc">
+            Envie uma mensagem pelo WhatsApp e nossa equipe de seleção entrará em contato. O processo é simples, rápido e sigiloso.
+          </p>
+          <a
+            href={WA_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+            style="width:100%;justify-content:center;margin-top:1rem"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Quero Trabalhar na Sauna Reds
+          </a>
+          <p style="color:var(--muted);font-size:0.72rem;text-align:center;margin-top:0.75rem">
+            Processo seletivo discreto e sigiloso.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.4rem;
+  }
+  .benefit-card  { text-align: center; }
+  .benefit-icon  { font-size: 2.5rem; margin-bottom: 0.9rem; }
+  .benefit-title { font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .benefit-desc  { color: var(--muted); font-size: 0.83rem; line-height: 1.7; }
+
+  .recruit-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+    align-items: start;
+  }
+  @media (max-width: 768px) { .recruit-layout { grid-template-columns: 1fr; } }
+
+  .req-list  { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+  .req-item  { display: flex; align-items: center; gap: 0.75rem; font-size: 0.93rem; color: var(--text); }
+  .req-check { color: var(--red); font-weight: 700; font-size: 1rem; flex-shrink: 0; }
+
+  .recruit-cta        { text-align: center; padding: 2.5rem 2rem; }
+  .recruit-cta-icon   { font-size: 3rem; margin-bottom: 1rem; }
+  .recruit-cta-title  { font-family: "lora", serif; font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .recruit-cta-desc   { color: var(--muted); font-size: 0.88rem; line-height: 1.75; }
+</style>

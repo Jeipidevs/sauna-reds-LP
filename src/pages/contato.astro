@@ -1,0 +1,268 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FAQ from '../components/FAQ.astro';
+
+const WA_URL = 'https://wa.me/5551980437575';
+
+const breadcrumb = [
+  { name: 'Início', url: '/'       },
+  { name: 'Contato', url: '/contato' },
+];
+
+const faqItems = [
+  {
+    question: 'Qual o horário de funcionamento da Sauna Reds?',
+    answer: 'Funcionamos de terça a sábado, das 14h às 5h da manhã. Aos domingos e segundas-feiras permanecemos fechados.',
+  },
+  {
+    question: 'Onde fica a Sauna Reds em Capão da Canoa?',
+    answer: 'Estamos na Rua Alfa do Centauro, 720, bairro Arco Íris, Capão da Canoa – RS, CEP 95555-000. Temos estacionamento próprio para os clientes. Coordenadas: 29°44\'02.5"S 50°00\'22.8"W (Plus Code: 7X8V+9F).',
+  },
+  {
+    question: 'Como entrar em contato com a Sauna Reds?',
+    answer: 'Pelo WhatsApp (51) 98043-7575 ou pelo e-mail redssauna@gmail.com. Atendemos de terça a sábado a partir das 14h.',
+  },
+  {
+    question: 'A Sauna Reds aceita reservas antecipadas?',
+    answer: 'Sim! Recomendamos reservar com antecedência, especialmente nas sextas, sábados e datas especiais. Entre em contato pelo WhatsApp (51) 98043-7575.',
+  },
+  {
+    question: 'Qual é a política de privacidade da Sauna Reds?',
+    answer: 'Tratamos todos os dados dos clientes com total sigilo e discrição. Não compartilhamos informações pessoais com terceiros. A entrada é discreta e o estacionamento é reservado.',
+  },
+];
+
+const hours = [
+  { day: 'Terça-Feira',  open: '14h', close: '5h' },
+  { day: 'Quarta-Feira', open: '14h', close: '5h' },
+  { day: 'Quinta-Feira', open: '14h', close: '5h' },
+  { day: 'Sexta-Feira',  open: '14h', close: '5h' },
+  { day: 'Sábado',       open: '14h', close: '5h' },
+  { day: 'Domingo',      open: '—',   close: 'Fechado' },
+  { day: 'Segunda-Feira',open: '—',   close: 'Fechado' },
+];
+---
+
+<Layout
+  title="Contato e Localização – Sauna Reds Capão da Canoa RS"
+  description="Rua Alfa do Centauro, 720, Arco Íris, Capão da Canoa – RS. WhatsApp: (51) 98043-7575. Funcionamos de terça a sábado, das 14h às 5h. Conheça a Sauna Reds."
+  breadcrumb={breadcrumb}
+  faqItems={faqItems}
+>
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Localização na hierarquia do site">
+    <a href="/">Início</a>
+    <span aria-hidden="true">›</span>
+    <span aria-current="page">Contato</span>
+  </nav>
+
+  <!-- Banner -->
+  <div class="page-banner">
+    <span class="page-banner__eyebrow">Fale Conosco</span>
+    <h1 class="page-banner__title">Como <em>Chegar</em> e<br />Entrar em Contato</h1>
+    <p class="page-banner__sub">
+      Estamos em Capão da Canoa, RS. Fácil de encontrar, difícil de esquecer.
+    </p>
+  </div>
+
+  <!-- Contato + Mapa -->
+  <section style="background:var(--bg)">
+    <div class="container">
+      <div class="contact-layout">
+
+        <!-- Info -->
+        <div class="contact-info">
+          <h2 class="sec-title reveal" style="text-align:left;margin-bottom:2rem">
+            Informações de <span>Contato</span>
+          </h2>
+
+          <div class="contact-item reveal d1">
+            <div class="contact-icon" aria-hidden="true">📍</div>
+            <div>
+              <div class="contact-label">Endereço</div>
+              <address class="contact-value" style="font-style:normal">
+                Rua Alfa do Centauro, 720<br />
+                Arco Íris<br />
+                Capão da Canoa – RS<br />
+                CEP 95555-000
+              </address>
+            </div>
+          </div>
+
+          <div class="contact-item reveal d2">
+            <div class="contact-icon" aria-hidden="true">📱</div>
+            <div>
+              <div class="contact-label">WhatsApp</div>
+              <div class="contact-value">
+                <a href={WA_URL} target="_blank" rel="noopener">(51) 98043-7575</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item reveal d3">
+            <div class="contact-icon" aria-hidden="true">📧</div>
+            <div>
+              <div class="contact-label">E-mail</div>
+              <div class="contact-value">
+                <a href="mailto:redssauna@gmail.com">redssauna@gmail.com</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item reveal d4">
+            <div class="contact-icon" aria-hidden="true">📸</div>
+            <div>
+              <div class="contact-label">Instagram</div>
+              <div class="contact-value">
+                <a href="https://instagram.com/reds.capao" target="_blank" rel="noopener">@reds.capao</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hours table -->
+          <div class="hours-block reveal d5">
+            <div class="contact-label" style="margin-bottom:0.75rem">Horário de Funcionamento</div>
+            <table class="hours-table" aria-label="Horário de funcionamento da Sauna Reds">
+              <tbody>
+                {hours.map((h) => (
+                  <tr class={h.close === 'Fechado' ? 'closed-row' : ''}>
+                    <td>{h.day}</td>
+                    <td>{h.close === 'Fechado' ? <span style="color:var(--muted)">Fechado</span> : <span style="color:var(--gold)">{h.open} – {h.close}</span>}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <a href={WA_URL} target="_blank" rel="noopener" class="btn-primary reveal" style="margin-top:2rem">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Falar no WhatsApp
+          </a>
+        </div>
+
+        <!-- Map embed -->
+        <div class="map-block reveal d2">
+          <div class="map-placeholder glass">
+            <div class="map-pin" aria-hidden="true">📍</div>
+            <strong class="map-name">Sauna Reds</strong>
+            <p class="map-addr">Rua Alfa do Centauro, 720<br />Arco Íris · Capão da Canoa – RS</p>
+            <a
+              href="https://maps.google.com/?q=-29.734046106225108,-50.0063330018132"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary map-btn"
+              aria-label="Abrir no Google Maps"
+            >
+              Abrir no Google Maps
+            </a>
+            <a
+              href="https://waze.com/ul?ll=-29.734046106225108,-50.0063330018132&navigate=yes"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-outline map-btn"
+              aria-label="Navegar pelo Waze"
+            >
+              Navegar pelo Waze
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <FAQ
+    items={faqItems}
+    title="Perguntas sobre Localização e Contato"
+    eyebrow="FAQ — Sauna Reds Capão da Canoa"
+  />
+
+</Layout>
+
+<style>
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 768px) { .contact-layout { grid-template-columns: 1fr; } }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .contact-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    background: rgba(204, 0, 0, 0.13);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .contact-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.25rem;
+  }
+
+  .contact-value {
+    color: var(--text);
+    font-size: 0.93rem;
+    line-height: 1.55;
+  }
+
+  .contact-value a {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-value a:hover { color: var(--gold); }
+
+  .hours-block { margin-top: 0.5rem; }
+
+  .hours-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .hours-table td {
+    padding: 0.45rem 0;
+    font-size: 0.85rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .hours-table td:last-child { text-align: right; }
+
+  .closed-row td { color: var(--muted); }
+
+  /* Map */
+  .map-block { position: sticky; top: 5rem; }
+
+  .map-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    gap: 0.75rem;
+    min-height: 380px;
+  }
+
+  .map-pin  { font-size: 3.5rem; }
+  .map-name { font-family: "lora", serif; font-size: 1.4rem; color: var(--gold); }
+  .map-addr { color: var(--muted); font-size: 0.88rem; line-height: 1.65; }
+  .map-btn  { width: 100%; justify-content: center; margin-top: 0.25rem; }
+</style>

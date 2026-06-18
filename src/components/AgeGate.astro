@@ -1,0 +1,184 @@
+---
+// Age verification — rendered as SSG HTML, gate logic runs client-side only.
+// Googlebot sees full page content (SSG), users see gate via JS.
+---
+
+<div id="age-gate" aria-modal="true" role="dialog" aria-labelledby="age-title" aria-describedby="age-desc">
+  <div class="age-box">
+    <div class="age-logo">
+      <picture>
+        <source srcset="/images/logo-neon.webp" type="image/webp" />
+        <img src="/images/logo-neon.jpg" alt="Sauna Reds" class="age-logo-img" width="200" height="150" loading="eager" decoding="async" />
+      </picture>
+    </div>
+    <div class="age-sub">Capão da Canoa · RS</div>
+    <p class="age-title" id="age-title" role="heading" aria-level="1">Você tem 18 anos ou mais?</p>
+    <p class="age-desc" id="age-desc">
+      Este site contém conteúdo adulto destinado exclusivamente a maiores de 18 anos.
+      Confirme sua idade para continuar.
+    </p>
+    <div class="age-btns">
+      <button class="btn-yes" id="age-yes">Sim, tenho 18+</button>
+      <button class="btn-no" id="age-no">Não, sair</button>
+    </div>
+    <p class="age-warn">
+      Ao entrar você confirma ter 18 anos ou mais e concorda com os nossos Termos de Uso.
+    </p>
+  </div>
+</div>
+
+<style>
+  #age-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.97);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  #age-gate.visible {
+    display: flex;
+  }
+
+  .age-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 3rem 2.5rem;
+    max-width: 460px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 80px rgba(204, 0, 0, 0.22);
+  }
+
+  @media (max-width: 400px) {
+    .age-box { padding: 2rem 1.5rem; }
+  }
+
+  .age-logo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .age-logo-img {
+    height: 89px;
+    width: auto;
+    display: block;
+    mix-blend-mode: screen;
+  }
+
+  .age-sub {
+    font-size: var(--fs-13);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .age-title {
+    font-family: "lora", serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .age-desc {
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.65;
+    margin-bottom: 2rem;
+  }
+
+  .age-btns {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .btn-yes,
+  .btn-no {
+    flex: 1;
+    padding: 0.9rem 1rem;
+    min-height: 44px;
+    border: none;
+    border-radius: 6px;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.22s;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .btn-yes {
+    background: var(--red);
+    color: #fff;
+  }
+
+  .btn-yes:hover {
+    background: var(--red-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px var(--red-glow);
+  }
+
+  .btn-no {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .btn-no:hover {
+    border-color: rgba(255,255,255,0.35);
+    color: var(--text);
+  }
+
+  .age-warn {
+    margin-top: 1.5rem;
+    font-size: 0.67rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+</style>
+
+<script>
+  const gate = document.getElementById('age-gate') as HTMLElement | null;
+  const btnYes = document.getElementById('age-yes') as HTMLButtonElement | null;
+  const btnNo  = document.getElementById('age-no')  as HTMLButtonElement | null;
+
+  // Show gate only if not already verified
+  if (gate && !sessionStorage.getItem('age-ok')) {
+    gate.classList.add('visible');
+    // Move focus into the dialog
+    btnYes?.focus();
+  }
+
+  // Focus trap — keep Tab/Shift+Tab inside the dialog
+  gate?.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key !== 'Tab') return;
+    const focusable = [btnYes, btnNo].filter(Boolean) as HTMLButtonElement[];
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last?.focus(); }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first?.focus(); }
+    }
+  });
+
+  btnYes?.addEventListener('click', () => {
+    if (!gate) return;
+    gate.style.transition = 'opacity 0.4s';
+    gate.style.opacity = '0';
+    setTimeout(() => gate.classList.remove('visible'), 400);
+    sessionStorage.setItem('age-ok', '1');
+  });
+
+  btnNo?.addEventListener('click', () => {
+    window.location.href = 'https://www.google.com';
+  });
+</script>
